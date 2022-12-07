@@ -197,6 +197,15 @@ body {
   transform: scale(2);
 }
 
+.comment-card {
+  font-size: 18pt;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 25px;
+  background-color: var(--swatch-accent);
+  color: lightsalmon;
+}
+
 #workspace-home,
 #workspace-edit {
   position: absolute;

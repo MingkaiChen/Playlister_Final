@@ -13,6 +13,9 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import { Button } from '@mui/material';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import CommentIcon from '@mui/icons-material/Comment';
 
 export default function AppBanner() {
     const { auth } = useContext(AuthContext);
@@ -35,6 +38,14 @@ export default function AppBanner() {
 
     const handleHouseClick = () => {
         store.closeCurrentList();
+    }
+
+    const handleSelectPlayer = () => {
+        store.selectPlayer();
+    }
+
+    const handleSelectComment = () => {
+        store.selectComment();
     }
 
     const menuId = 'primary-search-account-menu';
@@ -109,6 +120,24 @@ export default function AppBanner() {
                     </Typography>
                     <Box sx={{ flexGrow: 1 }}>{editToolbar}</Box>
                     <Box sx={{ height: "90px", display: { xs: 'none', md: 'flex' } }}>
+                        <Button
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        startIcon={<PlayCircleOutlineIcon/>}
+                        onClick={handleSelectPlayer}
+                        disabled={store.functionSelector === "player"}>
+                            Player
+                        </Button>
+                        <Button
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        startIcon={<CommentIcon/>}
+                        onClick={handleSelectComment}
+                        disabled={store.functionSelector === "comment" || !store.currentList}>
+                            Comment
+                        </Button>
                         <IconButton
                             size="large"
                             edge="end"
