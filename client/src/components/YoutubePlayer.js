@@ -135,7 +135,7 @@ export default function YoutubePlayer() {
         }
     }
 
-    if(store.currentList !== null){
+    if(store.currentList !== null && store.currentList.songs.length > 0){
     return (<div>
         <YouTube
         videoId={playlist[index]}
@@ -151,7 +151,7 @@ export default function YoutubePlayer() {
             <br></br>
             Artist: {store.currentList.songs[index].artist}
             <br></br>
-            <Box sx= {{bgcolor: "darkgray", borderRadius: "25px", width : "40%", transform: "translate(55%, 0%)"}}>
+            <Box sx= {{bgcolor: "darkgray", borderRadius: "25px", width : "28%", transform: "translate(130%, 0%)"}}>
             <IconButton onClick={(event) => {handlePlayPrevious(event)}}><SkipPreviousIcon/></IconButton>
             <IconButton onClick={(event) =>{handleStop(event)}}><StopIcon/></IconButton>
             <IconButton onClick={(event) => {handlePlay(event)}}><PlayArrowIcon/></IconButton>
@@ -174,7 +174,7 @@ export default function YoutubePlayer() {
             <br></br>
             Artist: None
             <br></br>
-            <Box sx= {{bgcolor: "darkgray", borderRadius: "25px", width : "30%", transform: "translate(110%, 0%)"}}>
+            <Box sx= {{bgcolor: "darkgray", borderRadius: "25px", width : "30%", transform: "translate(130%, 0%)"}}>
                 <IconButton onClick={(event) => {handlePlayPrevious(event)}}><SkipPreviousIcon/></IconButton>
                 <IconButton onClick={(event) =>{handleStop(event)}}><StopIcon/></IconButton>
                 <IconButton onClick={(event) => {handlePlay(event)}}><PlayArrowIcon/></IconButton>

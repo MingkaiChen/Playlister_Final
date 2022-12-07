@@ -51,7 +51,7 @@ const HomeScreen = () => {
     }
     return (
         <div id="playlist-selector">
-            <div id="list-selector-heading">
+            {/* <div id="list-selector-heading">
                 <Fab sx={{ transform: "translate(-20%, 0%)" }}
                     color="primary"
                     aria-label="add"
@@ -61,7 +61,7 @@ const HomeScreen = () => {
                     <AddIcon />
                 </Fab>
                 Your Playlists
-            </div>
+            </div> */}
             {/* <Box sx={{bgcolor:"background.paper"}} id="list-selector-list">
                 {
                     listCard

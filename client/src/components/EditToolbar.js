@@ -36,26 +36,26 @@ function EditToolbar() {
                 variant="contained">
                 <AddIcon />
             </Button>
-            <Button 
+            <Button
                 disabled={!store.canUndo()}
                 id='undo-button'
                 onClick={handleUndo}
                 variant="contained">
-                    <UndoIcon />
+                <UndoIcon />
             </Button>
-            <Button 
+            <Button
                 disabled={!store.canRedo()}
                 id='redo-button'
                 onClick={handleRedo}
                 variant="contained">
-                    <RedoIcon />
+                <RedoIcon />
             </Button>
-            <Button 
+            <Button
                 disabled={!store.canClose()}
                 id='close-button'
                 onClick={handleClose}
                 variant="contained">
-                    <CloseIcon />
+                <CloseIcon />
             </Button>
         </div>
     )
