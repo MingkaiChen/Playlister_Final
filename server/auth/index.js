@@ -8,6 +8,7 @@ function authManager() {
         try {
             const token = req.cookies.token;
             if (!token) {
+                console.log("No token found");
                 return res.status(401).json({
                     loggedIn: false,
                     user: null,
