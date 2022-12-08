@@ -1,45 +1,49 @@
 import React, { useContext, useState } from 'react'
 import { GlobalStoreContext } from '../store'
 import Button from '@mui/material/Button';
+import AuthContext from '../auth';
 
 function SongCard(props) {
     const { store } = useContext(GlobalStoreContext);
+    const { auth } = useContext(AuthContext);
     const [ draggedTo, setDraggedTo ] = useState(0);
     const { song, index } = props;
 
     function handleDragStart(event) {
-        event.dataTransfer.setData("song", index);
+        if (store.currentList.ownerEmail === auth.user.email) event.dataTransfer.setData("song", index);
     }
 
     function handleDragOver(event) {
-        event.preventDefault();
+        if (store.currentList.ownerEmail === auth.user.email) event.preventDefault();
     }
 
     function handleDragEnter(event) {
-        event.preventDefault();
-        setDraggedTo(true);
+        if (store.currentList.ownerEmail === auth.user.email) {
+            event.preventDefault();
+            setDraggedTo(true);
+        }
     }
 
     function handleDragLeave(event) {
-        event.preventDefault();
-        setDraggedTo(false);
+        if (store.currentList.ownerEmail === auth.user.email) {event.preventDefault();
+        setDraggedTo(false);}
     }
 
     function handleDrop(event) {
-        event.preventDefault();
+        if (store.currentList.ownerEmail === auth.user.email) {event.preventDefault();
         let targetIndex = index;
         let sourceIndex = Number(event.dataTransfer.getData("song"));
         setDraggedTo(false);
 
         // UPDATE THE LIST
-        store.addMoveSongTransaction(sourceIndex, targetIndex);
+        store.addMoveSongTransaction(sourceIndex, targetIndex);}
     }
     function handleRemoveSong(event) {
-        store.showRemoveSongModal(index, song);
+        if (store.currentList.ownerEmail === auth.user.email) store.showRemoveSongModal(index, song);
     }
     function handleClick(event) {
         // DOUBLE CLICK IS FOR SONG EDITING
-        if (event.detail === 2) {
+        if (event.detail === 2 && store.currentList.ownerEmail === auth.user.email) {
             console.log("double clicked");
             store.showEditSongModal(index, song);
         }
@@ -71,7 +75,8 @@ function SongCard(props) {
                 variant="contained"
                 id={"remove-song-" + index}
                 className="list-card-button"
-                onClick={handleRemoveSong}>{"\u2715"}</Button>
+                onClick={handleRemoveSong} disabled = {store.currentList.published}>{"\u2715"}
+                </Button>
         </div>
     );
 }

@@ -40,6 +40,7 @@ export default function AppBanner() {
     }
 
     const handleHouseClick = () => {
+        store.closeCurrentList();
         store.getMyLists();
     }
 
@@ -52,10 +53,12 @@ export default function AppBanner() {
     }
 
     const handleSelectPublic = () => {
+        store.closeCurrentList();
         store.getPublicLists();
     }
 
     const handleSelectByUser = () => {
+        store.closeCurrentList();
         store.getListsByUser();
     }
 
@@ -103,7 +106,7 @@ export default function AppBanner() {
     let menu = loggedOutMenu;
     if (auth.loggedIn) {
         menu = loggedInMenu;
-        if (store.currentList && store.editListStatus) {
+        if (store.currentList && store.editListStatus && store.currentList.ownerEmail === auth.user.email) {
             editToolbar = <EditToolbar />;
         }
     }
@@ -121,7 +124,7 @@ export default function AppBanner() {
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton onClick={handleHouseClick} color="inherit">
+                    <IconButton onClick={handleHouseClick} color="inherit" disabled = {store.guest}>
                         <HomeIcon />
                     </IconButton>
                     <IconButton onClick={handleSelectPublic} color="inherit">

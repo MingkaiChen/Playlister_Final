@@ -26,6 +26,17 @@ const HomeScreen = () => {
         store.createNewList();
     }
     let listCard = "";
+    let fab = "";
+    if (store.currentPage === "home") {
+        fab = <Fab sx={{ transform: "translate(800%, 25%)" }}
+            color="primary"
+            aria-label="add"
+            id="add-list-button"
+            onClick={handleCreateNewList}
+        >
+            <AddIcon />
+        </Fab>
+    }
     if (store) {
         listCard =
             <List sx={{ width: '100%', bgcolor: 'background.paper', mb: "20px" }}>
@@ -39,14 +50,7 @@ const HomeScreen = () => {
                     ))
 
                 }
-                <Fab sx={{ transform: "translate(800%, 25%)" }}
-                    color="primary"
-                    aria-label="add"
-                    id="add-list-button"
-                    onClick={handleCreateNewList}
-                >
-                    <AddIcon />
-                </Fab>
+                {fab}
             </List>;
     }
     return (
@@ -70,19 +74,19 @@ const HomeScreen = () => {
             </Box> */}
             <Grid2 container spacing={0} sx={{ bgcolor: "background.paper" }} id="list-grids">
                 <Grid2 item xs={6}>
-                        {
-                            listCard
-                        }
+                    {
+                        listCard
+                    }
                 </Grid2>
                 <Grid2 item xs={6}>
-                        {
-                            <FunctionSelector />
-                        }
+                    {
+                        <FunctionSelector />
+                    }
                 </Grid2>
             </Grid2>
             <MUIDeleteModal />
         </div>
-        )
+    )
 }
 
 export default HomeScreen;

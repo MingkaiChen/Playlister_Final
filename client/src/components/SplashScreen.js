@@ -4,10 +4,14 @@ import HowToRegIcon from '@mui/icons-material/HowToReg';
 import TourIcon from '@mui/icons-material/Tour';
 import Button from '@mui/material/Button';
 import { useHistory } from 'react-router-dom';
+import { GlobalStoreContext } from '../store';
+import { useContext } from 'react';
 
 
 
 export default function SplashScreen() {
+
+    const { store } = useContext(GlobalStoreContext);
 
     const history = useHistory();
 
@@ -22,7 +26,7 @@ export default function SplashScreen() {
     };
 
     const handleGuest = (event) => {
-        history.push("/screen/");
+        store.loginAsGuest();
     }
 
     return (

@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField';
 import AuthContext from '../auth';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import PublishIcon from '@mui/icons-material/Publish';
 
 /*
     This is a card in our list of top 5 lists. It lets select
@@ -25,6 +26,20 @@ function ListCard(props) {
     const { idNamePair, selected } = props;
 
     function handleLoadList(event, id) {
+        console.log("handleLoadList for " + id);
+        if (!event.target.disabled) {
+            let _id = event.target.id;
+            if (_id.indexOf('list-card-text-') >= 0)
+                _id = ("" + _id).substring("list-card-text-".length);
+
+            console.log("load " + event.target.id);
+
+            // CHANGE THE CURRENT LIST
+            // store.setCurrentList(id);
+        }
+    }
+
+    function handleLoadListandSet(event, id) {
         console.log("handleLoadList for " + id);
         if (!event.target.disabled) {
             let _id = event.target.id;
@@ -62,6 +77,7 @@ function ListCard(props) {
         if (event.code === "Enter") {
             let id = event.target.id.substring("list-".length);
             store.changeListName(id, text);
+            store.getMyLists();
             toggleEdit();
         }
     }
@@ -84,7 +100,7 @@ function ListCard(props) {
 
     let editButton = "";
 
-    if (auth.user && auth.user.email === idNamePair.email) {
+    if ((auth.user && auth.user.email === idNamePair.email) || idNamePair.published) {
         editButton =
             <IconButton
                 id={"edit-list-" + idNamePair._id}
@@ -92,6 +108,18 @@ function ListCard(props) {
                 aria-label='edit'
             >
                 <VisibilityIcon style={{ fontSize: '24pt' }} />
+            </IconButton>
+    }
+
+    let delButton = "";
+    if (auth.user && auth.user.email === idNamePair.email) {
+        delButton =
+            <IconButton
+                id={"delete-list-" + idNamePair._id}
+                onClick={(event) => handleDeleteList(event, idNamePair._id)}
+                aria-label='delete'
+            >
+                <DeleteIcon style={{ fontSize: '24pt' }} />
             </IconButton>
     }
 
@@ -117,6 +145,14 @@ function ListCard(props) {
         </IconButton>
     }
 
+    let publishButton = "";
+    if (auth.user && auth.user.email === idNamePair.email && !idNamePair.published) {
+        publishButton =
+            <IconButton onClick={(event) => { store.publishList(idNamePair._id) }} >
+                <PublishIcon style={{ fontSize: '22pt' }} />
+            </IconButton>
+    }
+
     let cardElement =
         <ListItem
             id={idNamePair._id}
@@ -125,9 +161,9 @@ function ListCard(props) {
             style={{ transform: "translate(1%,0%)", width: '98%', fontSize: '48pt' }}
             button
             onClick={(event) => {
-                handleLoadList(event, idNamePair._id)
+                handleLoadListandSet(event, idNamePair._id)
             }}
-            onDoubleClick={handleToggleEdit}
+            onDoubleClick={idNamePair.published ? (event) => { handleEditList(event) } : (event) => { handleToggleEdit(event) } }
         >
             <Box sx={{ p: 1, flexGrow: 1 }} style={{ fontSize: '15pt' }}>
                 <b>{idNamePair.name}</b> <br />
@@ -140,11 +176,10 @@ function ListCard(props) {
                 {editButton}
             </Box>
             <Box sx={{ p: 1 }}>
-                <IconButton onClick={(event) => {
-                    handleDeleteList(event, idNamePair._id)
-                }} aria-label='delete'>
-                    <DeleteIcon style={{ fontSize: '24pt' }} />
-                </IconButton>
+                {publishButton}
+            </Box>
+            <Box sx={{ p: 1 }}>
+                {delButton}
             </Box>
         </ListItem>
 
