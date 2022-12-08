@@ -16,6 +16,9 @@ import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import CommentIcon from '@mui/icons-material/Comment';
+import HomeIcon from '@mui/icons-material/Home';
+import Groups2Icon from '@mui/icons-material/Groups2';
+import PersonIcon from '@mui/icons-material/Person';
 
 export default function AppBanner() {
     const { auth } = useContext(AuthContext);
@@ -37,7 +40,7 @@ export default function AppBanner() {
     }
 
     const handleHouseClick = () => {
-        store.closeCurrentList();
+        store.getMyLists();
     }
 
     const handleSelectPlayer = () => {
@@ -46,6 +49,14 @@ export default function AppBanner() {
 
     const handleSelectComment = () => {
         store.selectComment();
+    }
+
+    const handleSelectPublic = () => {
+        store.getPublicLists();
+    }
+
+    const handleSelectByUser = () => {
+        store.getListsByUser();
     }
 
     const menuId = 'primary-search-account-menu';
@@ -110,14 +121,15 @@ export default function AppBanner() {
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography                        
-                        variant="h4"
-                        noWrap
-                        component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}                        
-                    >
-                        <Link onClick={handleHouseClick} style={{ textDecoration: 'none', color: 'white' }} to='/'>⌂</Link>
-                    </Typography>
+                    <IconButton onClick={handleHouseClick} color="inherit">
+                        <HomeIcon />
+                    </IconButton>
+                    <IconButton onClick={handleSelectPublic} color="inherit">
+                        <Groups2Icon />
+                    </IconButton>
+                    <IconButton onClick={handleSelectByUser} color="inherit">
+                        <PersonIcon />
+                    </IconButton>
                     <Box sx={{ flexGrow: 1 }}>{editToolbar}</Box>
                     <Box sx={{ height: "90px", display: { xs: 'none', md: 'flex' } }}>
                         <Button

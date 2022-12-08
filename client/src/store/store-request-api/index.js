@@ -44,6 +44,8 @@ export const updatePlaylistById = (id, playlist) => {
         playlist : playlist
     })
 }
+export const getPublicPlaylists = () => api.get(`/playlists/public`)
+export const getPublicPlaylistPairs = () => api.get(`/playlistpairs/public`)
 
 
 const apis = {
@@ -51,7 +53,8 @@ const apis = {
     deletePlaylistById,
     getPlaylistById,
     getPlaylistPairs,
-    updatePlaylistById
+    updatePlaylistById,
+    getPublicPlaylistPairs
 }
 
 export default apis

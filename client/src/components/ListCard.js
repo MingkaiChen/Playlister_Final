@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import ListItem from '@mui/material/ListItem';
 import TextField from '@mui/material/TextField';
+import AuthContext from '../auth';
 
 /*
     This is a card in our list of top 5 lists. It lets select
@@ -16,6 +17,7 @@ import TextField from '@mui/material/TextField';
 */
 function ListCard(props) {
     const { store } = useContext(GlobalStoreContext);
+    const { auth } = useContext(AuthContext);
     const [editActive, setEditActive] = useState(false);
     const [text, setText] = useState("");
     const { idNamePair, selected } = props;
@@ -83,20 +85,24 @@ function ListCard(props) {
             onClick={(event) => {
                 handleLoadList(event, idNamePair._id)
             }}
+            onDoubleClick={handleToggleEdit}
         >
-            <Box sx={{ p: 1, flexGrow: 1 }}>{idNamePair.name}</Box>
-            <Box sx={{ p: 1 }}>
+            <Box sx={{ p: 1, flexGrow: 1 }}  style={{ fontSize: '24pt' }}>
+                <b>{idNamePair.name}</b> <br />
+                By: {idNamePair.owner}
+            </Box>
+            {/* <Box sx={{ p: 1 }}>
                 <IconButton onClick={handleToggleEdit} aria-label='edit'>
-                    <EditIcon style={{ fontSize: '48pt' }} />
+                    <EditIcon style={{ fontSize: '24pt' }} />
                 </IconButton>
             </Box>
             <Box sx={{ p: 1 }}>
                 <IconButton onClick={(event) => {
                     handleDeleteList(event, idNamePair._id)
                 }} aria-label='delete'>
-                    <DeleteIcon style={{ fontSize: '48pt' }} />
+                    <DeleteIcon style={{ fontSize: '24pt' }} />
                 </IconButton>
-            </Box>
+            </Box> */}
         </ListItem>
 
     if (editActive) {
