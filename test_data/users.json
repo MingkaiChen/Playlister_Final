@@ -1,0 +1,60 @@
+[{
+  "_id": {
+    "$oid": "638ffc6cdaee9b59b2a1350b"
+  },
+  "playlists": [
+    {
+      "$oid": "638ffc6edaee9b59b2a13512"
+    },
+    {
+      "$oid": "63903f79daee9b59b2a135a0"
+    },
+    {
+      "$oid": "63903f7cdaee9b59b2a135a8"
+    },
+    {
+      "$oid": "63903f7edaee9b59b2a135b0"
+    },
+    {
+      "$oid": "63903f7fdaee9b59b2a135b8"
+    },
+    {
+      "$oid": "63903f82daee9b59b2a135c0"
+    }
+  ],
+  "firstName": "Mingkai",
+  "lastName": "Chen",
+  "email": "i@mingkai.me",
+  "passwordHash": "$2a$10$/rcHI1UM5zkIVpfDjChHRO6GdF8RRzHl7daXIfSpmDOcgkVkUwCby",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670380652223"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670397826622"
+    }
+  },
+  "__v": 6
+},{
+  "_id": {
+    "$oid": "639141769a9fd09bd4965011"
+  },
+  "playlists": [],
+  "firstName": "Alvis",
+  "lastName": "Chan",
+  "email": "alvis_chan@icloud.com",
+  "passwordHash": "$2a$10$obvnL28VMoogvXB5CHOjsOLZF2MxbimFJbz4keRkgHgAeJzJuE.4y",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670463862745"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670463862745"
+    }
+  },
+  "__v": 0
+}]

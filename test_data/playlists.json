@@ -1,0 +1,137 @@
+[{
+  "_id": {
+    "$oid": "638ffc6edaee9b59b2a13512"
+  },
+  "name": "Test",
+  "songs": [
+    {
+      "_id": {
+        "$oid": "6390eb28d62f3c7354e854a0"
+      },
+      "title": "Mr. Van Gogh Used to Say",
+      "artist": "Orange Ocean",
+      "youTubeId": "FZGeR5jTrO4"
+    },
+    {
+      "_id": {
+        "$oid": "63915a38110919a51bbf42df"
+      },
+      "title": "Untitled",
+      "artist": "?",
+      "youTubeId": "dQw4w9WgXcQ"
+    }
+  ],
+  "ownerEmail": "i@mingkai.me",
+  "ownerName": "Mingkai Chen",
+  "published": false,
+  "publishedDate": null,
+  "likes": 0,
+  "dislikes": 0,
+  "comments": [
+    {
+      "_id": {
+        "$oid": "639124bbba078c8ff53040d4"
+      },
+      "ownerName": "Mingkai Chen",
+      "comment": "test"
+    },
+    {
+      "_id": {
+        "$oid": "6391250bba078c8ff5304104"
+      },
+      "ownerName": "Mingkai Chen",
+      "comment": "test_2"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670380654043"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670470717638"
+    }
+  },
+  "__v": 70
+},{
+  "_id": {
+    "$oid": "63903f7fdaee9b59b2a135b8"
+  },
+  "name": "Empty List ",
+  "songs": [],
+  "ownerEmail": "i@mingkai.me",
+  "ownerName": "Mingkai Chen",
+  "published": true,
+  "publishedDate": {
+    "$date": {
+      "$numberLong": "1670473327135"
+    }
+  },
+  "likes": 0,
+  "dislikes": 0,
+  "comments": [],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670397823605"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670473327167"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "639110102ec7003961990ecb"
+  },
+  "name": "Test_other",
+  "songs": [
+    {
+      "_id": {
+        "$oid": "6390eb28d62f3c7354e854a0"
+      },
+      "title": "Mr. Van Gogh Used to Say",
+      "artist": "Orange Ocean",
+      "youTubeId": "FZGeR5jTrO4"
+    }
+  ],
+  "ownerEmail": "alvis_chan@icloud.com",
+  "ownerName": "Alvis Chan",
+  "published": true,
+  "publishedDate": {
+    "$date": {
+      "$numberLong": "0"
+    }
+  },
+  "likes": 9,
+  "dislikes": 0,
+  "comments": [
+    {
+      "_id": {
+        "$oid": "6391457eb995f59e22a85da5"
+      },
+      "ownerName": "Mingkai Chen",
+      "comment": "Good list!"
+    },
+    {
+      "_id": {
+        "$oid": "639152f3110919a51bbf4034"
+      },
+      "ownerName": "Mingkai Chen",
+      "comment": "Nice work!"
+    }
+  ],
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670380654043"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670469269558"
+    }
+  },
+  "__v": 23
+}]
