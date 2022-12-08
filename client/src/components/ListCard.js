@@ -2,11 +2,13 @@ import React, { useContext, useState } from 'react'
 import { GlobalStoreContext } from '../store'
 import Box from '@mui/material/Box';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import IconButton from '@mui/material/IconButton';
 import ListItem from '@mui/material/ListItem';
 import TextField from '@mui/material/TextField';
 import AuthContext from '../auth';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 /*
     This is a card in our list of top 5 lists. It lets select
@@ -67,6 +69,10 @@ function ListCard(props) {
         setText(event.target.value);
     }
 
+    function handleEditList(event) {
+        store.setEditList(idNamePair._id, true);
+    }
+
     let selectClass = "unselected-list-card";
     if (selected) {
         selectClass = "selected-list-card";
@@ -75,6 +81,42 @@ function ListCard(props) {
     if (store.isListNameEditActive) {
         cardStatus = true;
     }
+
+    let editButton = "";
+
+    if (auth.user && auth.user.email === idNamePair.email) {
+        editButton =
+            <IconButton
+                id={"edit-list-" + idNamePair._id}
+                onClick={handleEditList}
+                aria-label='edit'
+            >
+                <VisibilityIcon style={{ fontSize: '24pt' }} />
+            </IconButton>
+    }
+
+    function handleLikes(event) {
+        store.addLike(idNamePair._id);
+
+    }
+
+    function handleDislikes(event) {
+        store.addDislike(idNamePair._id);
+    }
+
+    let likesbuttons = "";
+    let dislikesbuttons = "";
+    if (idNamePair.published) {
+        likesbuttons = 
+        <IconButton onClick={(event) => handleLikes(event)}>
+            <ThumbUpIcon style={{ fontSize: '18pt' }} />
+        </IconButton>
+        dislikesbuttons =
+        <IconButton onClick={(event) => { handleDislikes(event) }} >
+            <ThumbDownIcon style={{ fontSize: '18pt' }} />
+        </IconButton>
+    }
+
     let cardElement =
         <ListItem
             id={idNamePair._id}
@@ -87,14 +129,15 @@ function ListCard(props) {
             }}
             onDoubleClick={handleToggleEdit}
         >
-            <Box sx={{ p: 1, flexGrow: 1 }}  style={{ fontSize: '24pt' }}>
+            <Box sx={{ p: 1, flexGrow: 1 }} style={{ fontSize: '15pt' }}>
                 <b>{idNamePair.name}</b> <br />
-                By: {idNamePair.owner}
+                By: {idNamePair.owner} <br />
+                {idNamePair.published ? <div>Published: {idNamePair.publishedDate.slice(0,10)}</div> : null}
             </Box>
-            {/* <Box sx={{ p: 1 }}>
-                <IconButton onClick={handleToggleEdit} aria-label='edit'>
-                    <EditIcon style={{ fontSize: '24pt' }} />
-                </IconButton>
+            <Box sx={{ p: 1, fontSize: "18pt" }}>{likesbuttons}{idNamePair.published? idNamePair.likes : null}</Box>
+            <Box sx={{ p: 1, fontSize: "18pt" }}>{dislikesbuttons}{idNamePair.published? idNamePair.dislikes : null}</Box> 
+            <Box sx={{ p: 1 }}>
+                {editButton}
             </Box>
             <Box sx={{ p: 1 }}>
                 <IconButton onClick={(event) => {
@@ -102,7 +145,7 @@ function ListCard(props) {
                 }} aria-label='delete'>
                     <DeleteIcon style={{ fontSize: '24pt' }} />
                 </IconButton>
-            </Box> */}
+            </Box>
         </ListItem>
 
     if (editActive) {

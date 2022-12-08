@@ -275,7 +275,7 @@ function GlobalStoreContextProvider(props) {
                     listNameActive: false,
                     listIdMarkedForDeletion: null,
                     listMarkedForDeletion: null,
-                    functionSelector: "comment",
+                    functionSelector: store.functionSelector,
                     editListStatus: store.editListStatus,
                     currentPage: store.currentPage
                 });
@@ -284,7 +284,7 @@ function GlobalStoreContextProvider(props) {
                 return setStore({
                     currentModal: CurrentModal.NONE,
                     idNamePairs: store.idNamePairs,
-                    currentList: payload.playlist,
+                    currentList: payload.list,
                     currentSongIndex: -1,
                     currentSong: null,
                     newListCounter: store.newListCounter,
@@ -694,7 +694,7 @@ function GlobalStoreContextProvider(props) {
                         status: status
                     }
                 });
-                history.push("/playlist/" + response.data.playlist._id);
+                history.push("/playlist/" + response.data.playlist._id + "/");
             }
         }
         asyncSetCurrentList(id);
@@ -749,6 +749,36 @@ function GlobalStoreContextProvider(props) {
             }
         }
         asyncGetPlaylistPairsByUser();
+    }
+
+    store.addLike = function (id) {
+        async function asyncAddLike(id) {
+            let response = await api.getPlaylistById(id);
+            if (response.data.success) {
+                let playlist = response.data.playlist;
+                playlist.likes++;
+                async function updateList(playlist) {
+                    let update_response = await api.updatePlaylistById(id, playlist);
+                    if (update_response.data.success) {
+                        storeReducer({
+                            type: GlobalStoreActionType.ADD_COMMENT,
+                            payload: playlist,
+                        });
+                    }
+                    if (store.currentPage === "public") {
+                        store.getPublicLists();
+                    }
+                    else if (store.currentPage === "home") {
+                        store.getMyLists();
+                    }
+                    else if (store.currentPage === "user") {
+                        store.getListsByUser();
+                    }
+                }
+                updateList(playlist);
+            }
+        }
+        asyncAddLike(id);
     }
 
     function KeyPress(event) {

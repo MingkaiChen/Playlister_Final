@@ -39,7 +39,7 @@ const HomeScreen = () => {
                     ))
 
                 }
-                <Fab sx={{ transform: "translate(1150%, 10%)" }}
+                <Fab sx={{ transform: "translate(800%, 25%)" }}
                     color="primary"
                     aria-label="add"
                     id="add-list-button"
